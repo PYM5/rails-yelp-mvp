@@ -1,0 +1,30 @@
+<h1><%= @restaurant.name %></h1>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Détails du restaurant</h5>
+
+    <p><strong>Nom du restaurant :</strong> <%= @restaurant.name %></p>
+    <p><strong>Adresse :</strong> <%= @restaurant.address %></p>
+    <p><strong>Numéro de téléphone :</strong> <%= @restaurant.phone_number %></p>
+    <p><strong>Catégorie :</strong> <%= @restaurant.category %></p>
+
+    <%= link_to 'Modifier le Restaurant', edit_restaurant_path(@restaurant), class: 'btn btn-warning' %>
+    <%= link_to 'Retour à la liste', restaurants_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+
+<!-- Affichage des commentaires -->
+<h3 class="mt-4">Commentaires</h3>
+<% @restaurant.ratings.each do |rating| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <p><strong>Commentaire :</strong> <%= rating.content %></p>
+      <p><strong>Note :</strong> <%= rating.rating %> / 5</p>
+      <p><strong>Date :</strong> <%= rating.updated_at.strftime('%d %b %Y %H:%M') %></p>
+    </div>
+  </div>
+<% end %>
+
+<!-- Lien pour ajouter un commentaire -->
+<%= link_to 'Ajouter un commentaire', new_restaurant_rating_path(@restaurant), class: 'btn btn-primary mt-4' %>
